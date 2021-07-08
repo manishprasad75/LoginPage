@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block content %}
+ <div id="alert-box"></div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3 mt-3">
+                    <h2 class="mb-3" style="font-weight: 300">Upload video</h2>
+                    <form method="post" id="upload-form" action="" enctype="multipart/form-data">
+                        {%csrf_token%}
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="video" accept="video/*" id="uploadVideoFile" oninput="input_filename();">
+                            <label id="file_input_label" class="custom-file-label" for="image">Select file</label>
+                        </div>
+                        
+                    </form>
+
+                    <div id="progress-box" class="not-visible mt-2">Progress</div>
+                    <div id="cancel-box" class="not-visible">
+                        <!-- <button id="cancel-btn" class="btn btn-danger">cancel</button> -->
+                        <button type="button" id="cancel-btn" class="btn btn-outline-secondary">Cancel upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id="video-box" class="mt-3"></div>
+{%endblock %}

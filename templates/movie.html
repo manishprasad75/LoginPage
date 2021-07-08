@@ -1,0 +1,108 @@
+{% load static %}
+
+{%block content %}
+
+{% if name %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>video Synk</title>
+    <script>
+      let url =  "{{video}}";
+    </script>
+  </head>
+  <body style="background: #111">
+  <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel" style="background-color: black;">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{%url 'index'%}">Video Sync</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarToggle"
+            aria-controls="navbarToggle"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="#">Home</a>
+              <a class="nav-item nav-link" href="#">About</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {%if user.is_authenticated %}
+              <a class="nav-item nav-link" href="#">My videos</a>
+              <a class="nav-item nav-link" href="{%url 'logout' %}">Logout</a>
+              <a class="nav-item nav-link" href="#">Profile</a>
+              {%else %}
+               <a class="nav-item nav-link" href="{%url 'login' %}">Login</a>
+              <a class="nav-item nav-link" href="{%url 'register' %}">Register</a>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+        <div class="video__box__container">
+            <div class="video__box">
+                <video controls id="video" src="http://html5videoformatconverter.com/data/images/happyfit2.mp4" poster="{{image}}" ></video>
+            </div>
+            <div class="video__details">
+                <div class="header__box">
+                    <h1 class="title">{{name}}</h1>
+                    <div class="banner__buttons btn">
+                        <a href="{{url}}movie/{{id}}"><button class="banner__button" style="text-decoration: none;">Sync </button> </a>
+                    </div>
+
+                </div>
+                <p class="description">{{description}}</p>
+<!--                <p class="category"><span>Category: </span>{{category}}</p>-->
+            </div>
+
+        </div>
+
+
+    <!-- <video src="/media/videos/input.mp4" controls></video> -->
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        if (Hls.isSupported()) {
+    var video = document.getElementById('video');
+    var hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+    });
+}
+else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = url;
+    video.addEventListener('canplay', function () {
+        video.play();
+    });
+}
+    </script>
+
+  </body>
+</html>
+{% endif %}
+
+{%endblock %}
