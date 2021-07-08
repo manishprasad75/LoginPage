@@ -8,4 +8,6 @@
 
 5. In registration page provide valid email as it will send OTP on that email to verify the email.        
 
-5. I try my best to make it more generic. So that it won't be depend on any framework.
+6. I try my best to make it more generic. So that it won't be depend on any framework.
+
+7. Used /admin -> to go to admin page.
